@@ -22,6 +22,10 @@ export default {
         probeType: {
             type: Number,
             default: 0
+        },
+        pullUpLoad: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -38,19 +42,35 @@ export default {
         })
 
         //2.监听滚动位置
-        this.scroll.on('scroll', (position) => {
+        if(this.probeType === 2 || this.probeType === 3) {
+            this.scroll.on('scroll', (position) => {
             this.$emit('Uscroll',position);
         })
+        }
+
+        //3.监听scroll滚动到底部
+        if(this.pullUpLoad) {
+            this.scroll.on('pullingUp',() => {
+                this.$emit('pullingUp');
+            })
+        }
+
+        // this.scroll.scrollerHeight = 100000;
+        console.log(this.scroll);
+        
     },
     methods: {
         scrollTo(x, y, time=300) {
-            this.scroll.scrollTo(x, y, time);
+            this.scroll && this.scrollTo && this.scroll.scrollTo(x, y, time);
         },
         finishPullUp() {
-            this.scroll.finishPullUp();
+            this.scroll && this.finishPullUp && this.scroll.finishPullUp();
         },
         refresh() {
-            this.scroll.refresh();
+            this.scroll && this.refresh && this.scroll.refresh();
+        },
+        getScrollY() {
+            return this.scroll ? this.scroll.y : 0;
         }
     }
 }

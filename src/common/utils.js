@@ -1,12 +1,18 @@
-/*
- * @Author: heyanfen
- * @Date: 2019-12-16 00:11:17
- * @LastEditTime: 2019-12-16 01:07:42
- * @LastEditors: Please set LastEditors
- * @Description: 正则学习
- * @FilePath: \vue-router\supermall\src\common\utils.js
- */
-export function formatDate(date, fmt) {
+export function debounce(func,delay) {
+  let timer = null;
+
+  return function(...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      func.apply(this,args);
+    },delay)
+  }
+}
+
+
+ export function formatDate(date, fmt) {
   //正则表达式：字符串匹配利器（难：规则太多）
   //1.获取年份
   //y+ -> 1个或者多个
