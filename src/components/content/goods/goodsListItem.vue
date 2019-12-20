@@ -9,7 +9,7 @@
 <template>
   <div class="goods-item" @click="itemClick">
       <img :src="showImage" alt="" @load="imageLoad">
-      <div class="goods-info">
+      <div class="goods-infos">
         <p>{{goodsItem.title}}</p>
         <span class="price">{{goodsItem.price}}</span>
         <span class="collect">{{goodsItem.cfav}}</span>
@@ -60,7 +60,7 @@ export default {
     /* border:3px solid var(--color-tint); */
   }
 
-  .goods-info {
+  .goods-infos {
     font-size: 12px;
     position: absolute;
     bottom: 5px;
@@ -70,23 +70,23 @@ export default {
     text-align: center;
   }
 
-  .goods-info p {
+  .goods-infos p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-bottom: 3px;
   }
 
-  .goods-info .price {
+  .goods-infos .price {
     color: var(--color-high-text);
     margin-right: 20px;
   }
 
-  .goods-info .collect {
+  .goods-infos .collect {
     position: relative;
   }
 
-  .goods-info .collect::before {
+  .goods-infos .collect::before {
     content: '';
     position: absolute;
     left: -15px;

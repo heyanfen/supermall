@@ -6,6 +6,9 @@
         <detailBaseInfo :goods="goods"></detailBaseInfo>
         <detailShopInfo :shop="shop"></detailShopInfo>
         <detailGoodsInfo :detail-info="detailInfo" @imageLoad="imageLoad"></detailGoodsInfo>
+        <detailParamInfo :param-info="paramInfo"></detailParamInfo>
+        <detailCommentInfo :comment-info="commentInfo"></detailCommentInfo>
+        <GoodsList :goods="recommends"></GoodsList>
       </Scroll>
   </div>
 </template>
@@ -16,10 +19,13 @@ import detailSwiper from './detailComponents/detailSwiper'
 import detailBaseInfo from './detailComponents/DetailBaseInfo'
 import detailShopInfo from './detailComponents/DetailShopInfo'
 import detailGoodsInfo from './detailComponents/DetailGoodsInfo'
+import detailParamInfo from './detailComponents/DetailParamInfo'
+import detailCommentInfo from './detailComponents/DetailCommentInfo'
 
 import Scroll from 'components/common/scroll/Scroll'
+import GoodsList from 'components/content/goods/goodsList'
 
-import { getDetail, Goods, Shop } from 'network/detail'
+import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
 export default {
     name: 'Detail',
     components: {
@@ -28,8 +34,11 @@ export default {
         detailBaseInfo,
         detailShopInfo,
         detailGoodsInfo,
+        detailParamInfo,
+        detailCommentInfo,
 
-        Scroll
+        Scroll,
+        GoodsList
     },
     data() {
         return {
@@ -37,7 +46,10 @@ export default {
             topImages: [],
             goods: {},
             shop: {},
-            detailInfo: {}
+            detailInfo: {},
+            paramInfo: {},
+            commentInfo: {},
+            recommends: []
         }
     },
     created() {
@@ -58,6 +70,20 @@ export default {
 
             //4.保存商品的详情数据
             this.detailInfo = data.detailInfo;
+
+            //5.获取参数信息
+            // console.log(data.itemParams.info, data.itemInfo.rule, 'heyanfen');
+            this.paramInfo = new GoodsParam(data.itemParams.info,data.itemParams.rule);
+
+            //6.取出评论信息
+            if(data.rate.cRate !== 0) {
+                this.commentInfo = data.rate.list[0];
+            }
+
+            //请求推荐商品数据
+            getRecommend().then(res => {
+                this.recommends = res.data.list;
+            })
         })
     },
     methods: {
