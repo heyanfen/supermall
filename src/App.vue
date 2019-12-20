@@ -1,14 +1,6 @@
-<!--
- * @Author: your name
- * @Date: 2019-12-07 20:28:15
- * @LastEditTime: 2019-12-08 17:40:43
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-router\supermall\src\App.vue
- -->
 <template>
   <div id="app">
-    <keep-alive>
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
     <mainTabBar></mainTabBar>

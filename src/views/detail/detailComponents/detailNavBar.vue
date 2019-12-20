@@ -1,11 +1,3 @@
-<!--
- * @Author: heyanfen
- * @Date: 2019-12-14 11:08:57
- * @LastEditTime: 2019-12-14 12:24:53
- * @LastEditors: Please set LastEditors
- * @Description: 详情页导航栏
- * @FilePath: \vue-router\supermall\src\views\detail\detailComponents\detailNavBar.vue
- -->
 <template>
   <div>
       <navBar>
@@ -18,7 +10,8 @@
               class="item-style"
               :class="{active: index === currentIndex}"
               @click="titleClick(index)">
-              {{item}}</div>
+              {{item}}
+            </div>
           </div>
       </navBar>
   </div>

@@ -1,34 +1,35 @@
 <template>
   <div id="details-style">
       <detailNavBar class="detail-nav"></detailNavBar>
-      <Scroll class="detail-content" ref="scroll">
+      <Scroll class="detailContent" ref="scroll">
         <detailSwiper :top-images="topImages"></detailSwiper>
         <detailBaseInfo :goods="goods"></detailBaseInfo>
         <detailShopInfo :shop="shop"></detailShopInfo>
+        <detailGoodsInfo :detail-info="detailInfo" @imageLoad="imageLoad"></detailGoodsInfo>
       </Scroll>
-      
   </div>
 </template>
 
 <script>
-import goodsList from 'components/content/goods/goodsList'
 import detailNavBar from './detailComponents/detailNavBar'
 import detailSwiper from './detailComponents/detailSwiper'
 import detailBaseInfo from './detailComponents/DetailBaseInfo'
 import detailShopInfo from './detailComponents/DetailShopInfo'
-import detailImageInfo from './detailComponents/datailImageInfo'
+import detailGoodsInfo from './detailComponents/DetailGoodsInfo'
 
 import Scroll from 'components/common/scroll/Scroll'
 
-import { getDetail, Goods, Shop, getRecommend } from 'network/detail'
+import { getDetail, Goods, Shop } from 'network/detail'
 export default {
     name: 'Detail',
     components: {
         detailNavBar,
         detailSwiper,
         detailBaseInfo,
-        Scroll,
-        detailShopInfo
+        detailShopInfo,
+        detailGoodsInfo,
+
+        Scroll
     },
     data() {
         return {
@@ -43,35 +44,36 @@ export default {
         //1.保存传入的iid
         this.iid = this.$route.params.id;
 
-        //2.根据iid请求详情数据
         getDetail(this.iid).then(res => {
-            console.log(res.result);
-            
-            //1.取出数据
+            console.log(res);
             const data = res.result;
-            //2.获取顶部图片轮播数据
-            this.topImages = res.result.itemInfo.topImages;
+            //1.获取顶部图片的轮播数据
+            this.topImages = res.result.itemInfo.topImages
 
-            //3.获取商品信息
-            this.goods = new Goods(data.itemInfo,data.columns, data.shopInfo.services)
+            //2.获取shangp信息
+            this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services);
 
-            //4.创建店铺信息的对象
-            this.shop = new Shop(data.shopInfo);
+            //3.创建店铺信息对象
+            this.shop = new Shop(data.shopInfo)
 
-            //5.取出详情的信息
+            //4.保存商品的详情数据
             this.detailInfo = data.detailInfo;
         })
     },
     methods: {
+        imageLoad() {
+            this.$refs.scroll.refresh();
+        }
     }
+
 }
 </script>
 
 <style scoped>
-#details-style {
+#details-style{
     position: relative;
     z-index: 9;
-    background-color: white;
+    background-color: #fff;
     height: 100vh;
 }
 .detail-nav{
@@ -79,13 +81,7 @@ export default {
     z-index: 9;
     background-color: #fff;
 }
-.detail-content{
+.detailContent{
     height: calc(100% - 44px);
-}
-.goods-info-style{
-    background-color: #fff;
-}
-.shop-info-style{
-    background-color: #fff;
 }
 </style>

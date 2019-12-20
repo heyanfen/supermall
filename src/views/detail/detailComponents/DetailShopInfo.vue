@@ -40,7 +40,10 @@
 		name: "DetailShopInfo",
     props: {
 		  shop: {
-		    type: Object
+        type: Object,
+        default() {
+          return {}
+        }
       }
     },
     filters: {
@@ -119,21 +122,21 @@
   }
 
   .shop-middle-right .score {
-    color: #5ea732;
+    color:  #f13e3a;
   }
 
   .shop-middle-right .score-better {
-    color: #f13e3a;
+    color: #5ea732;
   }
 
   .shop-middle-right .better span {
-    background-color: #5ea732;
+    background-color: #f13e3a;
     color: #fff;
     text-align: center;
   }
 
   .shop-middle-right .better-more span {
-    background-color: #f13e3a;
+    background-color:  #5ea732;
   }
 
   .shop-bottom {
