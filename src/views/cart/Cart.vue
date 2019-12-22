@@ -1,23 +1,56 @@
-<!--
- * @Author: your name
- * @Date: 2019-11-25 15:32:35
- * @LastEditTime: 2019-11-26 13:30:48
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-router\tabbarv2\src\views\cart\Cart.vue
- -->
 <template>
 <div>
-    <h2>购物车</h2>
+    <!--导航-->
+    <navBar class="nav-bar">
+        <div slot="center">购物车({{length}})</div>
+    </navBar>
+
+    <!--商品列表-->
+    <cartList></cartList>
+
+    <!--底部汇总-->
+    <cartButtomBar></cartButtomBar>
 </div>
 </template>
 
 <script>
+import navBar from 'components/common/navbar/navBar'
+import cartList from './childComponents/cartList'
+import cartButtomBar from './childComponents/cartButtomBar'
+
+import { mapGetters } from 'vuex'
 export default {
-    name: 'Cart'
+    name: 'Cart',
+    components: {
+        navBar,
+        cartList,
+        cartButtomBar
+    },
+    data() {
+        return {
+
+        }
+    },
+    computed: {
+        // cartLength() {
+        //     //return this.$store.state.cartList.length;
+        //     return this.$store.getters.cartLength;
+        // }
+
+        //直接使用getters里面的属性
+        //两种语法：数组语法和对象语法
+        // ...mapGetters(['cartLength'])
+        ...mapGetters({
+            length: 'cartLength'
+        })
+    }
 }
 </script>
 
-<style>
-
+<style scoped>
+.nav-bar{
+    background-color: var(--color-tint);
+    color: white;
+    /* font-weight: 700; 加粗字体*/
+}
 </style>

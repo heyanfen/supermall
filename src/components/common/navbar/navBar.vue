@@ -1,11 +1,3 @@
-<!--
- * @Author: heyanfen
- * @Date: 2019-12-08 18:48:30
- * @LastEditTime: 2019-12-08 21:03:14
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-router\supermall\src\components\common\navbar\navBar.vue
- -->
 <template>
   <div class="nav-bar">
       <div class="left"><slot name="left"></slot></div>
