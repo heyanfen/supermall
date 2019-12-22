@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2019-12-11 14:03:55
- * @LastEditTime: 2019-12-16 01:04:55
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-router\supermall\src\components\content\goods\goodsListItem.vue
- -->
 <template>
   <div class="goods-item" @click="itemClick">
       <img :src="showImage" alt="" @load="imageLoad">
@@ -35,6 +27,7 @@ export default {
   },
   methods: {
     imageLoad() {
+      //事件总线发送事件
       this.$bus.$emit('itemImageLoad')
     },
     itemClick() {

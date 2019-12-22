@@ -27,10 +27,10 @@ import NavBar from 'components/common/navbar/navBar';
 import tabControl from 'components/content/tabControl/tabControl'
 import goodsList from 'components/content/goods/goodsList'
 import Scroll from 'components/common/scroll/Scroll'
-import backTop from 'components/content/backTop/backTop'
 
 import {getHomeMultidata, getHomeGoods} from 'network/home';
 import {debounce} from 'common/utils'
+import {itemListenerMixin, backTopMixin} from 'common/mixin'
 
 export default {
   name: 'Home',
@@ -41,9 +41,9 @@ export default {
     featureView,
     tabControl,
     goodsList,
-    Scroll,
-    backTop
+    Scroll
   },
+  mixins: [itemListenerMixin, backTopMixin],
   data() {
     return {
       banners: null,
@@ -56,7 +56,6 @@ export default {
       },
       list: [],
       currentType: 'pop',
-      isShow: false,
       tabOffsetTop: 0,
       isTabFixed: false,
       saveY: 0
@@ -74,11 +73,6 @@ export default {
   mounted() {
     //监听item中图片加载完成, 在mounted里面是为了保证this.$refs.scroll已经完成了挂载
     //封装一个函数，进行防抖
-    const refresh = debounce(this.$refs.scroll.refresh,500);
-
-    this.$bus.$on('itemImageLoad', () => {
-      refresh();
-    })
 
     //2.获取tabControl的offsetTop
     //所有的组件都有一个属性$el:这个属性用于获取组件中的元素，但是图片加载慢，对这个长度有影响，所以这个放在swiperImageLoad方法里改变
@@ -106,8 +100,12 @@ export default {
   },
   //不活跃时调用：离开时调用
   deactivated() {
+    //保存Y值
     console.log('home deactivated ');
     this.saveY = this.$refs.scroll.getScrollY();
+    
+    //2.取消全部事件的监听(取消的事件，处理函数)
+    this.$bus.$off('itemImageLoad',this.itemImgListener)
   },
   methods: {
     /**
@@ -147,12 +145,7 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
       this.$refs.tabControl2.currentIndex = index;
     },
-    backClick() {
-      //拿到组件对象，拿到对象就可以直接拿到对象里面的属性
-      //scrollTo(x,y,回到（x,y）的时间); x,y要回到的坐标
-      //再进过Scroll对象内部的封装
-      this.$refs.scroll.scrollTo(0,0,500);
-    },
+    
     contentScroll(position) {
       //1.判断backTop是否显示
       if((-position.y) > 1000) {
