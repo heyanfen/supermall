@@ -9,7 +9,7 @@
       合计:{{totalPrice}}
     </div>
 
-    <div class="calculate">
+    <div class="calculate" @click="calcClick">
       去计算：({{calculated}})
     </div>
   </div>
@@ -30,6 +30,11 @@ export default {
               this.cartList.forEach(item => item.checked = false);
           } else {
             this.cartList.forEach(item => item.checked = true);
+          }
+        },
+        calcClick() {
+          if(this.totalPrice == '￥0.00') {
+            this.$toast.show('请先选择商品',1500);
           }
         }
     },

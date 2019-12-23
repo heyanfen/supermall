@@ -13,6 +13,7 @@
       <detailBottomBar @addToCart="addToCart"></detailBottomBar>
       <!--与首页使用混入-->
       <backTop @click.native="backClick" v-show="isShow"></backTop>
+      <!-- <toast :message="message" :show="show"></toast> -->
   </div>
 </template>
 
@@ -31,7 +32,12 @@ import GoodsList from 'components/content/goods/goodsList'
 import {debounce} from 'common/utils'
 import {itemListenerMixin, backTopMixin} from 'common/mixin'
 
+/**映射actions里面的方法在当前组件内使用 */
+import { mapActions } from 'vuex'
+
 import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
+
+// import toast from 'components/common/toast/toast'
 export default {
     name: 'Detail',
     components: {
@@ -45,7 +51,8 @@ export default {
         detailBottomBar,
 
         Scroll,
-        GoodsList
+        GoodsList,
+        // toast
     },
     mixins: [itemListenerMixin, backTopMixin],
     data() {
@@ -59,7 +66,9 @@ export default {
             commentInfo: {},
             recommends: [],
             themeTopsY: [],
-            currentIndex: 0
+            currentIndex: 0,
+            // message: '',
+            // show: false
         }
     },
     created() {
@@ -128,6 +137,8 @@ export default {
         this.$bus.$off('itemImageLoad',this.itemImgListener)
     },
     methods: {
+        /**actions映射使用 */
+        ...mapActions(['addCart']),
         imageLoad() {
             this.$refs.scroll.refresh();
 
@@ -175,7 +186,23 @@ export default {
              product.count = 1;
              //2.将商品添加到购物车里面
             //  this.$store.commit('addCart', product)
-            this.$store.dispatch('addCart', product);
+            // this.$store.dispatch('addCart', product).then(res => {
+            //     console.log(res);
+            // });
+
+            //vuex知识点补充：使用映射的方法使用actions里面的方法
+            this.addCart(product).then(res => {
+                // this.show = true;
+                // this.message = res;
+
+                // setTimeout(() => {
+                //     this.show = false;
+                //     this.message = '';
+                // },1500)
+
+                // console.log(this.$toast);
+                this.$toast.show(res,1500);
+            })
         }
     }
 }
