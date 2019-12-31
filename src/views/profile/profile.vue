@@ -1,116 +1,46 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-25 15:32:12
- * @LastEditTime: 2019-12-13 19:56:54
- * @LastEditors: Please set LastEditors
+ * @LastEditTime : 2019-12-31 14:50:19
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-router\tabbarv2\src\views\profile\profile.vue
  -->
 <template>
   <div>
       <Scroll class="content">
-        <ul>
-          <li>个人信息1</li>
-          <li>个人信息2</li>
-          <li>个人信息3</li>
-          <li>个人信息4</li>
-          <li>个人信息5</li>
-          <li>个人信息6</li>
-          <li>个人信息7</li>
-          <li>个人信息8</li>
-          <li>个人信息9</li>
-          <li>个人信息10</li>
-          <li>个人信息11</li>
-          <li>个人信息12</li>
-          <li>个人信息13</li>
-          <li>个人信息14</li>
-          <li>个人信息15</li>
-          <li>个人信息16</li>
-          <li>个人信息17</li>
-          <li>个人信息18</li>
-          <li>个人信息19</li>
-          <li>个人信息20</li>
-          <li>个人信息21</li>
-          <li>个人信息22</li>
-          <li>个人信息23</li>
-          <li>个人信息24</li>
-          <li>个人信息25</li>
-          <li>个人信息26</li>
-          <li>个人信息27</li>
-          <li>个人信息28</li>
-          <li>个人信息29</li>
-          <li>个人信息30</li>
-          <li>个人信息31</li>
-          <li>个人信息32</li>
-          <li>个人信息33</li>
-          <li>个人信息34</li>
-          <li>个人信息35</li>
-          <li>个人信息36</li>
-          <li>个人信息37</li>
-          <li>个人信息38</li>
-          <li>个人信息39</li>
-          <li>个人信息40</li>
-          <li>个人信息41</li>
-          <li>个人信息42</li>
-          <li>个人信息43</li>
-          <li>个人信息44</li>
-          <li>个人信息45</li>
-          <li>个人信息46</li>
-          <li>个人信息47</li>
-          <li>个人信息48</li>
-          <li>个人信息49</li>
-          <li>个人信息50</li>
-          <li>个人信息51</li>
-          <li>个人信息52</li>
-          <li>个人信息53</li>
-          <li>个人信息54</li>
-          <li>个人信息55</li>
-          <li>个人信息56</li>
-          <li>个人信息57</li>
-          <li>个人信息58</li>
-          <li>个人信息59</li>
-          <li>个人信息60</li>
-          <li>个人信息61</li>
-          <li>个人信息62</li>
-          <li>个人信息63</li>
-          <li>个人信息64</li>
-          <li>个人信息65</li>
-          <li>个人信息66</li>
-          <li>个人信息67</li>
-          <li>个人信息68</li>
-          <li>个人信息69</li>
-          <li>个人信息70</li>
-          <li>个人信息71</li>
-          <li>个人信息72</li>
-          <li>个人信息73</li>
-          <li>个人信息74</li>
-          <li>个人信息75</li>
-          <li>个人信息76</li>
-          <li>个人信息77</li>
-          <li>个人信息78</li>
-          <li>个人信息79</li>
-          <li>个人信息80</li>
-          <li>个人信息81</li>
-          <li>个人信息82</li>
-          <li>个人信息83</li>
-          <li>个人信息84</li>
-          <li>个人信息85</li>
-          <li>个人信息86</li>
-          <li>个人信息87</li>
-          <li>个人信息88</li>
-          <li>个人信息89</li>
-          <li>个人信息90</li>
-          <li>个人信息91</li>
-          <li>个人信息92</li>
-          <li>个人信息93</li>
-          <li>个人信息94</li>
-          <li>个人信息95</li>
-          <li>个人信息96</li>
-          <li>个人信息97</li>
-          <li>个人信息98</li>
-          <li>个人信息99</li>
-          <li>个人信息100</li>
-        </ul>
+        <div calss="top" @click="backClick">
+             <img src="~assets/img/profile/top.png" alt="error">
+        </div>
+
+        <div calss="header" @click="backClick">
+             <img src="~assets/img/profile/head.png" alt="error">
+        </div>
+
+        <div class="navigator">
+            <div>我的订单</div>
+            <div>我的钱包</div>
+            <div>优惠特权</div>
+            <div>地址管理</div>
+            <div>安全设置</div>
+            <div>维权管理</div>
+            <div>账号设置</div>
+         </div>
+        <div class="Incenter">
+                <div class="In">
+                  <div class="In1">
+                    <img src="~assets/img/profile/xiangqing.png" alt="error">
+                  </div>
+                   <div class="In2">
+                    <img src="~assets/img/profile/xiangqing1.png" alt="error">
+                   </div>
+                </div>
+         </div>
+
+         <div class="footer">
+            <img src="~assets/img/profile/footer.png" alt="error">
+         </div>
+
       </Scroll>
   </div>
 </template>
@@ -120,6 +50,7 @@ import Scroll from 'components/common/scroll/Scroll'
 export default {
   name: 'profile',
   components: {
+   
     Scroll
   }
 }
@@ -127,8 +58,68 @@ export default {
 
 <style scoped>
 .content{
-  height: 300px;
-  background-color: red;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.top {
+  width: 100%;
+  height: 36px;
+  overflow: hidden;
+  padding-top: 0%;
+}
+.content .top img{
+  width: 100vh;
+  height: 100vh;
+  overflow:auto;
+}
+
+
+.content .header {
+  width: 100%;
+  height: 105px;
+  overflow: hidden;
+  padding-top: 0%;
+}
+.navigator{
+  width: 80%;
+  height: 49px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+
+  margin: 0 auto;
+}
+.content .navigator span{
+  cursor: pointer;
+  /* margin-right: 240px; */
+  padding: 0px 0px 0px;
+}
+
+.content .Incenter{
+  height: 648px;
+  width: 100%;
+  /* background-color: #000; */
+}
+
+.content .Incenter .In{
+  height: 632px;
+  width: 917px;
+  /* background-color: #0f0; */
+  margin-left: 500px;
+  overflow: hidden;
+    box-shadow: 100px;
+}
+.content .Incenter .In .In1{
+  margin-left: 0px;
+   float: left;
+  overflow: hidden;
+}
+
+.content .Incenter .In .In2{
+  width: 772px;
+  margin-right: 0px;
+  float: right;
   overflow: hidden;
 }
 </style>

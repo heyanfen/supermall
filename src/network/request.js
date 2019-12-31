@@ -1,10 +1,18 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-08 21:12:27
+ * @LastEditTime : 2019-12-29 16:25:31
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-router\supermall\src\network\request.js
+ */
 import axios from 'axios'
 
 //方法四：最简单的axios的封装
 export function request(config) {
     //1.创建axios实例
     const instance1 = axios.create({
-        baseURL: 'http://106.54.54.237:8000/api/v1',
+        baseURL: 'http://106.54.54.237:8000/api/w1',
         timeout: 5000
     })
     //(1):请求拦截
